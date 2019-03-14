@@ -1,2 +1,2 @@
 # MedicalStore
-project in data security course
+Project in Data Security Course
