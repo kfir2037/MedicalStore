@@ -1,0 +1,69 @@
+﻿@model MedicalStore.Models.Patient
+
+@{
+    ViewBag.Title = "PatientWindow";
+    Layout = "~/Views/Shared/_LayoutPatients.cshtml";
+
+}
+
+<h2>UserWindow</h2>
+
+<style>
+
+    body {
+        background: #E6E6FA;
+    }
+
+    .options {
+        width: 120px;
+        height: 120px;
+        border-style: groove;
+        background-color: aquamarine;
+        margin-top: 50px;
+        float: left;
+        margin: 50px;
+    }
+
+
+    #option1 {
+        content: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSi_Mhb8KYI60oQEjRMl9ZlctQVu7Bb9IU5-4yldkGeVmSHIyVJyw);
+    }
+
+    #option2 {
+    }
+
+    #option3 {
+    }
+
+    #option4 {
+    }
+</style>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Manager Window</title>
+</head>
+
+
+<body>
+    <a href="../User/MakeOrder">
+        <div class="options" id="option1">option one</div>
+    </a>
+    <a href="#">
+        <div class="options" id="option2">option two</div>
+    </a>
+    <a href="#">
+        <div class="options" id="option3">Show Customers</div>
+    </a>
+    <a href="#">
+        <div class="options" id="option4">Add new Product</div>
+    </a>
+    <script>
+
+    </script>
+
+</body>
+</html>
+
+
+

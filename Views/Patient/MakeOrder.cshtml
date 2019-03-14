@@ -1,0 +1,105 @@
+﻿@model MedicalStore.ModelView.ProductViewModel
+
+@{
+    ViewBag.Title = "MakeOrder";
+    Layout = "~/Views/Shared/_LayoutPatients.cshtml";
+
+}
+
+<h2>Make Order</h2>
+<script src="~/Scripts/jquery-1.7.1.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+
+
+
+<style>
+    body {
+        background: #E6E6FA;
+        padding-top: 54px;
+        color: black;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    /* Create two unequal columns that floats next to each other */
+    .column {
+        float: left;
+        padding: 10px;
+        height: 120px; /* Should be removed. Only for demonstration */
+    }
+
+    .left {
+        width: 120px;
+    }
+
+    .right {
+        width: 120px;
+    }
+
+    /* Clear floats after the columns */
+    .row:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+</style>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+</head>
+
+<body>
+
+    <form method="post" action="../Request/MakeOrder">
+
+
+        @*new SelectList(Enum.GetValues(ProductName)),
+        "Select Gender")*@
+
+        @*<select class="form-control" id="dish" name="dish">
+            <option>Please Select Your Pizza </option>
+            <option>Personal Pizza</option>
+            <option>Big Pizza</option>
+            <option>Family Size Pizza</option>
+            <option>slice</option>s
+        </select>*@
+
+
+        @*@Html.DropDownListFor(m => m.product.MedName, new SelectList(Model.products, "MedName", "MedName"), "Please choose your medicine", new { name = "Name" })*@
+        @*<hr />*@
+        <br />
+        @*<div>
+            <label class="loginFormElement">User Name:</label>
+            <input class="form-control" id="UserName" name="UserName" readonly="readonly" value=@Session["UserName"]>
+        </div>*@
+        <div>
+            <label class="loginFormElement">ID:</label>
+            <input class="form-control" id="ID" name="ID" value=@Model.patient.Id>
+        </div>
+        <div>
+            <label class="loginFormElement">Doctor:</label>
+            <input class="form-control" id="DocId" name="DocId" >
+        </div>
+        <div>
+            <label class="loginFormElement">Medicine ID</label>
+            <input class="form-control" id="MedicineId" name="MedicineId">
+        </div>
+
+        <input type="submit" name="login" class="login login-submit" value="Send Request">
+    </form>
+    @TempData["Order"]
+    @Html.ValidationSummary()
+
+</body>
+
+</html>

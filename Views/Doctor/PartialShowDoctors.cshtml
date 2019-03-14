@@ -1,0 +1,61 @@
+﻿@model MedicalStore.ModelView.DoctorViewModel
+@{     
+    Layout = "~/Views/Shared/_LayoutDoctors.cshtml";
+}
+@using MedicalStore.Models
+
+<h4 style="color:blue">Current Doctors:</h4>
+<style>
+    body {
+        background: #E6E6FA;
+    }
+
+    table#t01 tr:nth-child(even) {
+        background-color: #eee;
+    }
+
+    table#t01 tr:nth-child(odd) {
+        background-color: #fff;
+    }
+
+    table#t01 th {
+        background-color: black;
+        color: white;
+    }
+
+    .headLine {
+        color: deepskyblue;
+        font-size: 130%;
+        font-weight: bold;
+    }
+
+    table {
+        width: 100%;
+    }
+
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+</style>
+
+<br />
+<table id="t01">
+    <tr class="headLine">
+        <td>First Name</td>
+        <td>Last Name</td>
+        <td>ID</td>
+        <td>User Name</td>
+    </tr>
+    @foreach (Doctor obj in Model.doctors)
+    {
+    <tr>
+        <td>@obj.FirstName</td>
+        <td>@obj.LastName</td>
+        <td>@obj.Id</td>
+        <td>@obj.UserName</td>
+        <td>@obj.License</td>
+        <td>@obj.Expertise</td>
+    </tr>
+    }
+</table>

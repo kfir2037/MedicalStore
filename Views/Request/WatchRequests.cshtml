@@ -1,0 +1,55 @@
+﻿@model MedicalStore.ModelView.RequestViewModel
+@using MedicalStore.Models
+<html>
+<title>
+
+</title>
+<body>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.request.RequestNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.request.PatientId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.request.MedId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.request.Approve)
+            </th>
+
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model.requests)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RequestNumber)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.PatientId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.MedId)
+
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Approve)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.RequestNumber }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.RequestNumber }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.RequestNumber })
+                </td>
+            </tr>
+        }
+
+</body>
+
+
+</html>
+
+

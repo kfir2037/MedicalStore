@@ -1,0 +1,10 @@
+﻿@model MedicalStore.ModelView.DoctorViewModel
+
+@{
+    ViewBag.Title = "ShowDoctors";
+    Layout = "~/Views/Shared/_LayoutDoctors.cshtml";
+}
+
+<h2>ShowDoctors</h2>
+
+@Html.Partial("PartialShowDoctors",Model)
