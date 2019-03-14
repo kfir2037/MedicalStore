@@ -134,7 +134,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\DoctorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\Patient2Controller.cs" />
     <Compile Include="Controllers\PatientController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
     <Compile Include="Controllers\RequestController.cs" />
@@ -207,11 +206,6 @@
     <Content Include="Views\Doctor\DoctorWindow.cshtml" />
     <Content Include="Views\Doctor\PartialShowDoctors.cshtml" />
     <Content Include="Views\Doctor\ShowDoctors.cshtml" />
-    <Content Include="Views\Patient2\Create.cshtml" />
-    <Content Include="Views\Patient2\Delete.cshtml" />
-    <Content Include="Views\Patient2\Details.cshtml" />
-    <Content Include="Views\Patient2\Edit.cshtml" />
-    <Content Include="Views\Patient2\Index.cshtml" />
     <Content Include="Views\Patient\ConfirmSignUp.cshtml" />
     <Content Include="Views\Patient\Edit.cshtml" />
     <Content Include="Views\Patient\Details.cshtml" />
