@@ -1,0 +1,88 @@
+﻿@{
+    ViewBag.Title = "About";
+    if (Session["DoctorLoggedIn"] != null)
+    {
+        Layout = "~/Views/Shared/_LayoutDoctors.cshtml";
+    }
+    else if (Session["PatientLoggedIn"] != null)
+    {
+        Layout = "~/Views/Shared/_LayoutPatients.cshtml";
+
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+}
+
+@*<h2>@ViewBag.Title.</h2>
+    <h3>@ViewBag.Message</h3>*@
+<style>
+    body {
+        background: #E6E6FA;
+        padding-top: 54px;
+        color: black;
+    }
+
+    /*.text{
+        color:white;
+    }*/
+
+    .pics {
+        border-radius: 50%;
+        width: 200px;
+        height: 200px;
+    }
+</style>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+</head>
+
+<body>
+    <!-- Page Content -->
+    <div class="container">
+
+        <!-- Introduction Row -->
+        <h1 class="my-4 text">
+            About Us
+            <small style="color:white">It's Nice to Meet You!</small>
+        </h1>
+        <p class="text">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sint, explicabo dolores ipsam aliquam inventore corrupti eveniet quisquam quod totam laudantium repudiandae obcaecati ea consectetur debitis velit facere nisi expedita vel?</p>
+
+        <!-- Team Members Row -->
+        <div class="row text">
+            <div class="col-lg-12">
+                <h2 class="my-4">Our Team</h2>
+            </div>
+            <div class="col-lg-4 col-sm-6 text-center mb-4">
+                <img class="pics" src="~/pictures/kfir.jpeg" alt="">
+                <h3>
+                    Kfir Nahmani
+                </h3>
+            </div>
+            <div class="col-lg-4 col-sm-6 text-center mb-4">
+                <img class="pics" src="~/pictures/or.jpg" alt="">
+                <h3>
+                    Or Shalit
+                </h3>
+            </div>
+
+        </div>
+
+    </div>
+    <!-- /.container -->
+    <!-- Footer -->
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

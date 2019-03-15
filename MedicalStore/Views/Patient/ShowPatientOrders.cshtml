@@ -1,0 +1,14 @@
+﻿@model MedicalStore.ModelView.RequestViewModel
+
+@{
+    ViewBag.Title = "ShowPatientOrders";
+    Layout = "~/Views/Shared/_LayoutPatients.cshtml";
+
+}
+
+<h2>Your Previous Orders:</h2>
+
+@{
+    WebGrid obj = new WebGrid(Model.requests);
+}
+@obj.GetHtml(tableStyle:"table") 
