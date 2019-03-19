@@ -42,36 +42,21 @@ namespace MedicalStore.Controllers
                      select x).ToList<Patient>();
 
                 Random rnd = new Random();
-                string user_code = rnd.Next(100, 9999999).ToString();
 
-                bool check_user_code = true;
-                while (check_user_code) {
-                    List<Patient> user_codes =
-                         (from x in dal.Patient
-                          where x.UserCode == user_code
-                          select x).ToList<Patient>();
-                    if (user_codes.Count() == 0)
-                    {
-                        check_user_code = false;
-                    }
-                    user_code = rnd.Next(100, 9999999).ToString();
-                }
                 PatientViewModel mng = new PatientViewModel();
                 if (obj.Count() > 0)
                 {
                     TempData["exist"] = "User Name is already exist";
-                    return View("../Home/SignUp", pat);
+                    return View("../Home/Index", pat);
                 }
                 
                 //UserDal dal = new UserDal();
-                pat.UserCode = user_code;
                 pat.Blocked = false;
                 dal.Patient.Add(pat);
                 dal.SaveChanges();
                 Session["UserName"] = pat.UserName;
                 Session["PatientLoggedIn"] = pat.UserName;
-
-                return View("ConfirmSignUp", pat);
+                return View("../Home/Index", pat);
             }
             return View("../Home/SignUp", pat);
         }
@@ -94,7 +79,7 @@ namespace MedicalStore.Controllers
             return View(patient);
         }
         [HttpPost]
-        public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,Age,City,UserCode,Prescription,Password,UserName,Blocked")] Patient patient)
+        public ActionResult Edit([Bind(Include = "Id,FirstName,LastName,Age,City,Prescription,Password,UserName,Blocked")] Patient patient)
         {
             PatientDal db = new PatientDal();
 
@@ -233,9 +218,9 @@ namespace MedicalStore.Controllers
             //send mail
             MailMessage mail = new MailMessage();
             SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
-
             mail.From = new MailAddress("kfir2037@gmail.com");
-            mail.To.Add("kfir2037@gmail.com");
+            //mail.To.Add("kfir2037@gmail.com");
+            mail.To.Add(CurrentPatient.Mail);
             mail.Subject = "Verfication Code";
             mail.Body = "Your code is: "+ MailCodeGenerated;
             SmtpServer.Port = 587;
@@ -268,6 +253,7 @@ namespace MedicalStore.Controllers
                 Session["PatientLoggedIn"] = UserName;
                 CurrentPatient.LoginAttempts = 0;
                 CurrentPatient.Blocked = false;
+                dal.SaveChanges();
                 return View("../Home/Index", CurrentPatient);
             }
             TempData["ErrorMailCode"] = "Your Code is incorrect, please try again";

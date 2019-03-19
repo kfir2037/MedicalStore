@@ -21,7 +21,6 @@ namespace MedicalStore.Models
         public string Age { get; set; }
         [Required]
         public string City { get; set; }
-        public string UserCode { get; set; }
         public string Prescription { get; set; }
         [Required]
         [RegularExpression("^[a-zA-Z0-9]{8,16}$", ErrorMessage = "Password must contain between 8 to 16 chars or numbers")]
@@ -30,6 +29,8 @@ namespace MedicalStore.Models
         public string UserName { get; set; }
         public bool Blocked { get; set; }
         public int LoginAttempts { get; set; }
+        [Required]
+        public string Mail { get; set; }
 
     }
 }

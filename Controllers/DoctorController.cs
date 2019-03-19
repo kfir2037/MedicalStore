@@ -51,7 +51,6 @@ namespace MedicalStore.Controllers
             obj.Password = doc.Password;
             obj.Expertise = doc.Expertise;
             obj.License = doc.License;
-            obj.DocCode = doc.DocCode;
 
             DoctorDal dal = new DoctorDal();
 
@@ -167,9 +166,9 @@ namespace MedicalStore.Controllers
             //send mail
             MailMessage mail = new MailMessage();
             SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
-
             mail.From = new MailAddress("kfir2037@gmail.com");
-            mail.To.Add("kfir2037@gmail.com");
+            //mail.To.Add("kfir2037@gmail.com");
+            mail.To.Add(CurrentDoctor.Mail);
             mail.Subject = "Verfication Code";
             mail.Body = "Your code is: " + MailCodeGeneratedDoctor;
             SmtpServer.Port = 587;

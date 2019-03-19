@@ -2,6 +2,8 @@
 
 @{
     ViewBag.Title = "ConfirmSignUp";
+    Layout = "~/Views/Shared/_LayoutPatients.cshtml";
+
 }
 
 <h2>Confirm Sign Up</h2>
@@ -40,14 +42,6 @@
 
         <dd>
             @Html.DisplayFor(model => model.City)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.UserCode)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.UserCode)
         </dd>
 
         <dt>
