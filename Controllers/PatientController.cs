@@ -23,6 +23,7 @@ namespace MedicalStore.Controllers
         public static string UserId;
         public static int LoginAttempt;
         public static string UserName;
+        public static Patient StaticPatient;
 
 
         // GET: Patient
@@ -116,11 +117,17 @@ namespace MedicalStore.Controllers
         {
             ProductViewModel prd = new ProductViewModel();
             ProductDal dal = new ProductDal();
+            DoctorDal dalDoctor = new DoctorDal();
             prd.patient = new Patient();
             List<Product> obj =
             (from x in dal.Product
              select x).ToList<Product>();
             prd.products = obj;
+            List<Doctor> doctors =
+            (from x in dalDoctor.Doctor
+             select x).ToList<Doctor>();
+            prd.patient = StaticPatient;
+            prd.doctors = doctors;
             return View(prd);
         }
 
@@ -254,6 +261,7 @@ namespace MedicalStore.Controllers
                 CurrentPatient.LoginAttempts = 0;
                 CurrentPatient.Blocked = false;
                 dal.SaveChanges();
+                StaticPatient = CurrentPatient;
                 return View("../Home/Index", CurrentPatient);
             }
             TempData["ErrorMailCode"] = "Your Code is incorrect, please try again";
@@ -437,13 +445,11 @@ namespace MedicalStore.Controllers
             base.Dispose(disposing);
         }
         public ActionResult ShowPatientOrders()
-        {
-            
+        {            
             RequestDal dal = new RequestDal();
             var id = @Session["UserId"];
             List<Request> obj =
                 (from x in dal.Requests
-                 //have to change the user name
                  where x.PatientId == id
                  select x).ToList<Request>();
             RequestViewModel req = new RequestViewModel();

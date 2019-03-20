@@ -12,6 +12,8 @@ namespace MedicalStore.ModelView
         public List<Product> products { get; set; }
         public Request request { get; set; }
         public Patient patient { get; set; }
+        public List<Doctor> doctors { get; set; }
+
 
     }
 }
