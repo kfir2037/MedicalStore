@@ -145,7 +145,7 @@ namespace MedicalStore.Controllers
             else if (CurrentDoctor.Blocked == true)
             {
                 TempData["User_lock"] = "Sorry, You are locked from the system";
-                return View("../DoctorPatient/DoctorLogin", patient);
+                return View("../Doctor/DoctorLogin", patient);
             }
             else if (CurrentDoctor.LoginAttempts > 5)
             {
@@ -198,9 +198,10 @@ namespace MedicalStore.Controllers
             {
                 Session["UserName"] = UserName;
                 Session["DoctorId"] = DoctorId;
-                Session["PatientLoggedIn"] = UserName;
+                Session["DoctorLoggedIn"] = UserName;
                 CurrentDoctor.LoginAttempts = 0;
                 CurrentDoctor.Blocked = false;
+                dal.SaveChanges();
                 return View("../Home/Index", CurrentDoctor);
             }
             TempData["ErrorMailCode"] = "Your Code is incorrect, please try again";

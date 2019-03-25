@@ -7,17 +7,21 @@ using System.Web;
 namespace MedicalStore.Models
 {
     public class Doctor
-    {
+    {   
+        [MaxLength(20)]
         [Required]
         public string FirstName { get; set; }
+        [MaxLength(20)]
         [Required]
         public string LastName { get; set; }
         [Required]
         [Key]
         [RegularExpression("(^[0-9]{9}$)", ErrorMessage = "ID must contain 9 numbers")]
         public string Id { get; set; }
+        [MaxLength(20)]
         [Required]
         public string Expertise { get; set; }
+        [MaxLength(20)]
         [Required]
         public string License { get; set; }
         [Required]
@@ -27,6 +31,7 @@ namespace MedicalStore.Models
         public string UserName { get; set; }
         public bool Blocked { get; set; }
         public int LoginAttempts { get; set; }
+        [MaxLength(20)]
         [Required]
         public string Mail { get; set; }
 

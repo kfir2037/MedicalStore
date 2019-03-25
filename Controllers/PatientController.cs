@@ -111,7 +111,6 @@ namespace MedicalStore.Controllers
             pat.patient = new Patient();
 
             return View("SearchPatients", pat);
-
         }
         public ActionResult MakeOrder()
         {
