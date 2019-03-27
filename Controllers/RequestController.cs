@@ -120,7 +120,7 @@ namespace MedicalStore.Controllers
         {
             Request req = new Request();
             string UserName =Request.Form["UserName"];
-            string MedicineId = Request.Form["MedicineId"];
+            string MedicineId = Request.Form["MedId"];
             string ID = Request.Form["ID"];
             string DocId = Request.Form["DocId"];
 
@@ -147,117 +147,7 @@ namespace MedicalStore.Controllers
 
             cvm.requests = dal.Requests.ToList<Request>();
             TempData["Order"] = "Something went wrong with your Order!";
-            //return View("../User/MakeOrder");
 
-            //Request req = new Request();
-            ////var x = prd.product.Name;
-            //var dish = "";
-            //var toppings = "";
-            //string toppings1 = "";
-            //string toppings2 = "";
-            //string toppings3 = "";
-            //string toppings4 = "";
-            //string toppings5 = "";
-            //string toppings6 = "";
-            //string toppings7 = "";
-            //string toppings8 = "";
-            //string address = "";
-
-
-            //if (Request.Form["Name"] != null)
-            //{
-            //    dish = Request.Form["Name"].ToString();
-            //}
-
-            //if (Request.Form["Tuna"] != null)
-            //{
-            //    toppings1 = Request.Form["Tuna"].ToString();
-            //    toppings += toppings1 + ",";
-
-            //}
-            //if (Request.Form["Tomato"] != null)
-            //{
-            //    toppings2 = Request.Form["Tomato"].ToString();
-            //    toppings += toppings2 + ",";
-
-            //}
-            //if (Request.Form["Mushrooms"] != null)
-            //{
-            //    toppings3 = Request.Form["Mushrooms"].ToString();
-            //    toppings += toppings3 + ",";
-
-            //}
-            //if (Request.Form["Garlic"] != null)
-            //{
-            //    toppings4 = Request.Form["Garlic"].ToString();
-            //    toppings += toppings4 + ",";
-
-            //}
-            //if (Request.Form["Olives"] != null)
-            //{
-            //    toppings5 = Request.Form["Olives"].ToString();
-            //    toppings += toppings5 + ",";
-            //}
-            //if (Request.Form["Corn"] != null)
-            //{
-            //    toppings6 = Request.Form["Corn"].ToString();
-            //    toppings += toppings6 + ",";
-
-            //}
-            //if (Request.Form["Eggplant"] != null)
-            //{
-            //    toppings7 = Request.Form["Eggplant"].ToString();
-            //    toppings += toppings7 + ",";
-
-            //}
-            //if (Request.Form["Onion"] != null)
-            //{
-            //    toppings8 = Request.Form["Onion"].ToString();
-            //    toppings += toppings8 + ",";
-
-            //}
-
-            //if (Request.Form["Address"] != null)
-            //{
-            //    address = Request.Form["Address"].ToString();
-            //}
-
-            //if (address == "")
-            //{
-            //    TempData["Order"] = "You hava to enter an address !";
-            //    //return View("../User/MakeOrder");
-            //    return RedirectToAction("MakeOrder", "User");
-            //}
-
-            //RequestViewModel cvm = new RequestViewModel();
-            ////Manager obj = new Manager();
-
-            //req.Price = "20";
-            //req.Address = address;
-            //req.Dish = dish;
-            ////ord.Dish = x;
-            //req.Toppings = toppings1 + toppings2 + toppings3 + toppings4 + toppings5 + toppings6 + toppings7 + toppings8;
-            //req.UserName = Request.Form["UserName"].ToString();
-
-            //OrderDal dal = new OrderDal();
-
-            //if (ModelState.IsValid)
-            //{
-            //    dal.Orders.Add(req);
-            //    dal.SaveChanges();
-            //    TempData["Order"] = "Your Order is on it's way!";
-            //    cvm.requests = dal.Orders.ToList<Request>();
-            //    //return View("../User/MakeOrder");
-            //    return RedirectToAction("MakeOrder", "User");
-            //}
-            //else
-            //{
-            //    cvm.request = req;
-            //}
-
-            //cvm.requests = dal.Orders.ToList<Request>();
-            //TempData["Order"] = "Something went wrong with your Order!";
-            ////return View("../User/MakeOrder");
             return RedirectToAction("MakeOrder", "Patient");
 
         }
