@@ -12,7 +12,6 @@ namespace MedicalStore.Controllers
 {
     public class DoctorController : Controller
     {
-
         public static string MailCodeGeneratedDoctor;
         public static string DoctorId;
         public static int LoginAttemptDoctor;
@@ -25,6 +24,7 @@ namespace MedicalStore.Controllers
         }
 
         public string SqlConnectionStringBuilder { get; private set; }
+
 
         public ActionResult DoctorWindow()
         {
@@ -61,7 +61,7 @@ namespace MedicalStore.Controllers
             (from x in dal.Doctor
              where x.UserName == doc.UserName
              select x).ToList<Doctor>();
-                DoctorViewModel doc2 = new DoctorViewModel();
+            DoctorViewModel doc2 = new DoctorViewModel();
 
                 if (id_exist_list.Count() > 0)
                 {

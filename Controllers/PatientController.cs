@@ -13,6 +13,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace MedicalStore.Controllers
 {
@@ -119,12 +120,12 @@ namespace MedicalStore.Controllers
             DoctorDal dalDoctor = new DoctorDal();
             prd.patient = new Patient();
             List<Product> obj =
-            (from x in dal.Product
-             select x).ToList<Product>();
+                (from x in dal.Product
+                 select x).ToList<Product>();
             prd.products = obj;
             List<Doctor> doctors =
-            (from x in dalDoctor.Doctor
-             select x).ToList<Doctor>();
+                (from x in dalDoctor.Doctor
+                 select x).ToList<Doctor>();
             prd.patient = StaticPatient;
             prd.doctors = doctors;
             return View(prd);
@@ -262,6 +263,7 @@ namespace MedicalStore.Controllers
                 CurrentPatient.Blocked = false;
                 dal.SaveChanges();
                 StaticPatient = CurrentPatient;
+                FormsAuthentication.SetAuthCookie(CurrentPatient.UserName,false);
                 return View("../Home/Index", CurrentPatient);
             }
             TempData["ErrorMailCode"] = "Your Code is incorrect, please try again";
@@ -321,91 +323,6 @@ namespace MedicalStore.Controllers
             return View(pat);
         }
 
-
-
-        //public ActionResult CheckPatient()
-        //{
-
-        //    PatientDal dal = new PatientDal();
-        //    string search_Id = Request.Form["Id"].ToString();
-        //    string search_Password = Request.Form["Password"].ToString();
-
-        //    List<Patient> failed_login_patient =
-        //        (from x in dal.Patient
-        //         where x.Id == search_Id
-        //         select x).ToList<Patient>();
-
-        //    if (failed_login_patient.Count()==0)
-        //    {
-        //        Patient temp_pat = new Patient();
-        //        TempData["again"] = "please try again!";
-        //        return View("Login",temp_pat);
-        //    }
-
-        //    List<Patient> obj;
-
-        //    if (TempData["UserCode_error"]==null)
-        //    {
-        //        obj =
-        //            (from x in dal.Patient
-        //             where x.Id == search_Id && x.Password == search_Password
-        //             select x).ToList<Patient>();
-        //    }
-        //    else
-        //    {
-        //        string search_UserCode = Request.Form["UserCode"].ToString();
-        //        obj =
-        //            (from x in dal.Patient
-        //             where x.Id == search_Id && x.Password == search_Password && x.UserCode==search_UserCode
-        //             select x).ToList<Patient>();
-        //    }
-        //    if (failed_login_patient[0].Blocked == false)
-        //    {
-
-        //        PatientViewModel pat = new PatientViewModel();
-        //        pat.patients = obj;
-        //        pat.patient = new Patient();
-        //        pat.patient.Id = search_Id;
-
-        //        if (pat.patients.Count() == 0)
-        //        {
-        //            failed_login_patient[0].LoginAttempts = failed_login_patient[0].LoginAttempts + 1;
-        //            dal.SaveChanges();
-
-        //            if (failed_login_patient[0].LoginAttempts > 0)
-        //            {
-        //                TempData["UserCode_error"] = "UserCode";
-        //            }
-
-        //            else if (failed_login_patient[0].LoginAttempts == 5)
-        //            {
-        //                TempData["User_lock"] = "Sorry, You are locked from the system";
-        //                failed_login_patient[0].Blocked = true;
-        //                dal.SaveChanges();
-        //            }
-        //            TempData["failed"] = "Patient Login failed. User name or password supplied doesn't exist.";
-        //            TempData["attempts"] = "you left " + (5 - (failed_login_patient[0].LoginAttempts)).ToString() + " chances";
-        //            ViewBag.UserNow = pat.patient.UserName;
-        //            return View("Login", pat.patient);
-        //        }
-        //        else
-        //        {
-        //            failed_login_patient[0].LoginAttempts = 0;
-        //            dal.SaveChanges();
-        //            Patient new_pat = new Patient();
-        //            new_pat = pat.patients[0];
-        //            Session["UserName"] = new_pat.UserName;
-        //            Session["UserId"] = new_pat.Id;
-        //            Session["PatientLoggedIn"] = new_pat.UserName;
-        //            return View("../Home/Index", new_pat);
-        //        }
-        //    }
-        //    else
-        //    {
-        //        TempData["User_lock"] = "Sorry, You are locked from the system";
-        //        return View("Login", failed_login_patient[0]);
-        //    }
-        //}
 
         public ActionResult Delete(string id)
         {

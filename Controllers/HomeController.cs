@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace MedicalStore.Controllers
 {
@@ -30,6 +31,7 @@ namespace MedicalStore.Controllers
         }
         public ActionResult SignOut()
         {
+            FormsAuthentication.SignOut();
             Session["UserName"] = null;
             Session["DoctorLoggedIn"] = null;
             Session["PatientLoggedIn"] = null;
