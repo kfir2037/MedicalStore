@@ -130,35 +130,55 @@
 </head>
 
 <body>
-
+    @using (Html.BeginForm("CheckPatient", "Patient", FormMethod.Post, new { role = "form" }))
+    {
     <div class="login-card">
         <h1>Log-in</h1><br>
-        <form action="../Patient/CheckPatient" method="post">
-            <div>
-                <input type="text" name="Id" readonly="readonly" disabled="disabled" placeholder="Id" value="@Model.Id">
-                <input type="password" name="Password" readonly="readonly" disabled="disabled" placeholder="Password" value="@Model.Password">
-            </div>
-            <input type="text" id="Code" name="Code" placeholder="Verfication Code">
+        @Html.AntiForgeryToken()
+        <div>
+            <input type="text" name="Id" readonly="readonly" disabled="disabled" placeholder="Id" value="@Model.Id">
+            <input type="password" name="Password" readonly="readonly" disabled="disabled" placeholder="Password" value="@Model.Password">
+        </div>
+        <input type="text" id="Code" name="Code" placeholder="Verfication Code">
 
-            <input type="submit" name="login" class="login login-submit" value="login">
-            <h5 style="color:red">@TempData["failed"]</h5>
-            <h5 style="color:red">@TempData["attempts"]</h5>
-            <h5 style="color:red">@TempData["User_lock"]</h5>
-        </form>
-
+        <input type="submit" name="login" class="login login-submit" value="login">
+        <h5 style="color:red">@TempData["failed"]</h5>
+        <h5 style="color:red">@TempData["attempts"]</h5>
+        <h5 style="color:red">@TempData["User_lock"]</h5>
         <div class="login-help">
             • <a href="../Patient/SignUp">Register</a> •
         </div>
     </div>
+    }
+
+    @*<div class="login-card">
+            <h1>Log-in</h1><br>
+            <form action="../Patient/CheckPatient" method="post">
+                <div>
+                    <input type="text" name="Id" readonly="readonly" disabled="disabled" placeholder="Id" value="@Model.Id">
+                    <input type="password" name="Password" readonly="readonly" disabled="disabled" placeholder="Password" value="@Model.Password">
+                </div>
+                <input type="text" id="Code" name="Code" placeholder="Verfication Code">
+
+                <input type="submit" name="login" class="login login-submit" value="login">
+                <h5 style="color:red">@TempData["failed"]</h5>
+                <h5 style="color:red">@TempData["attempts"]</h5>
+                <h5 style="color:red">@TempData["User_lock"]</h5>
+            </form>
+
+            <div class="login-help">
+                • <a href="../Patient/SignUp">Register</a> •
+            </div>
+        </div>*@
 
     <!-- <div id="error"><img src="https://dl.dropboxusercontent.com/u/23299152/Delete-icon.png" /> Your caps-lock is on.</div> -->
 
     <script src='http://codepen.io/assets/libs/fullpage/jquery_and_jqueryui.js'></script>
     <script>
-        
-        //document.getElementById("UserDetails").style.visibility = "hidden";
-        //document.getElementById("UserDetails").readOnly = true;
-        //document.getElementById("UserDetails").readOnly = true;
+
+                            //document.getElementById("UserDetails").style.visibility = "hidden";
+                            //document.getElementById("UserDetails").readOnly = true;
+                            //document.getElementById("UserDetails").readOnly = true;
 
     </script>
 </body>

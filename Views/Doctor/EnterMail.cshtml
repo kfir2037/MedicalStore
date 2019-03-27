@@ -2,7 +2,7 @@
 
 @{
     ViewBag.Title = "Login";
-    Layout = "~/Views/Shared/_LayoutDoctors.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h2>User Login</h2>
@@ -131,10 +131,10 @@
 </head>
 
 <body>
-
-    <div class="login-card">
-        <h1>Log-in</h1><br>
-        <form action="../Doctor/CheckDoctor" method="post">
+    @using (Html.BeginForm("CheckDoctor", "Doctor", FormMethod.Post, new { role = "form" }))
+    {
+        <div class="login-card">
+            <h1>Log-in</h1><br>
             <div>
                 <input type="text" name="Id" readonly="readonly" disabled="disabled" placeholder="Id" value="@Model.Id">
                 <input type="password" name="Password" readonly="readonly" disabled="disabled" placeholder="Password" value="@Model.Password">
@@ -145,21 +145,20 @@
             <h5 style="color:red">@TempData["failed"]</h5>
             <h5 style="color:red">@TempData["attempts"]</h5>
             <h5 style="color:red">@TempData["User_lock"]</h5>
-        </form>
 
-        <div class="login-help">
-            • <a href="../Patient/SignUp">Register</a> •
+            <div class="login-help">
+                • <a href="../Patient/SignUp">Register</a> •
+            </div>
         </div>
-    </div>
-
+    }
     <!-- <div id="error"><img src="https://dl.dropboxusercontent.com/u/23299152/Delete-icon.png" /> Your caps-lock is on.</div> -->
 
     <script src='http://codepen.io/assets/libs/fullpage/jquery_and_jqueryui.js'></script>
     <script>
-        
-        //document.getElementById("UserDetails").style.visibility = "hidden";
-        //document.getElementById("UserDetails").readOnly = true;
-        //document.getElementById("UserDetails").readOnly = true;
+
+                //document.getElementById("UserDetails").style.visibility = "hidden";
+                //document.getElementById("UserDetails").readOnly = true;
+                //document.getElementById("UserDetails").readOnly = true;
 
     </script>
 </body>

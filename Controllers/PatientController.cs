@@ -145,6 +145,7 @@ namespace MedicalStore.Controllers
             }
             return View(patient);
         }
+        [ValidateAntiForgeryToken]
         public ActionResult SendMail()
         {
             PatientDal dal = new PatientDal();
@@ -238,6 +239,7 @@ namespace MedicalStore.Controllers
 
             return View("../Patient/EnterMail",CurrentPatient);
         }
+        [ValidateAntiForgeryToken]
         public ActionResult CheckPatient()
         {
             PatientDal dal = new PatientDal();
