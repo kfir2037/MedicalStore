@@ -234,7 +234,6 @@ namespace MedicalStore.Controllers
             SmtpServer.Port = 587;
             SmtpServer.Credentials = new System.Net.NetworkCredential("kfir2037", "0542666134");
             SmtpServer.EnableSsl = true;
-
             SmtpServer.Send(mail);
             LoginAttempt = 0;
 
