@@ -30,6 +30,7 @@ namespace MedicalStore.Controllers
         {
             return View();
         }
+
         public ActionResult AddNewDoctor()
         {
             DoctorDal dal = new DoctorDal();
@@ -87,6 +88,7 @@ namespace MedicalStore.Controllers
             return View("AddNewDoctor", cvm);
         }
 
+        [ValidateAntiForgeryToken]
         public ActionResult SendMail()
         {
             DoctorDal dal = new DoctorDal();
@@ -180,6 +182,7 @@ namespace MedicalStore.Controllers
 
             return View("../Doctor/EnterMail", CurrentDoctor);
         }
+        [ValidateAntiForgeryToken]
         public ActionResult CheckDoctor()
         {
             DoctorDal dal = new DoctorDal();
@@ -209,128 +212,6 @@ namespace MedicalStore.Controllers
             return View("../Doctor/DoctorLogin", CurrentDoctor);
         }
 
-        //public ActionResult CheckDoctor()
-        //{
-
-        //    DoctorDal dal = new DoctorDal();
-        //    string search_Id = Request.Form["Id"].ToString();
-        //    string search_Password = Request.Form["Password"].ToString();
-
-        //    List<Doctor> failed_login_doctor =
-        //        (from x in dal.Doctor
-        //         where x.Id == search_Id
-        //         select x).ToList<Doctor>();
-
-        //    //if there is no doctor with the entered id
-        //    if (failed_login_doctor.Count() == 0)
-        //    {
-        //        Doctor temp_pat = new Doctor();
-        //        TempData["again"] = "please try again!";
-        //        return View("DoctorLogin", temp_pat);
-        //    }
-
-        //    List<Doctor> obj;
-
-        //    if (TempData["UserCode_error"] == null)
-        //    {
-        //        obj =
-        //            (from x in dal.Doctor
-        //             where x.Id == search_Id && x.Password == search_Password
-        //             select x).ToList<Doctor>();
-        //    }
-        //    else
-        //    {
-        //        string search_DocCode = Request.Form["DocCode"].ToString();
-        //        obj =
-        //            (from x in dal.Doctor
-        //             where x.Id == search_Id && x.Password == search_Password && x.DocCode == search_DocCode
-        //             select x).ToList<Doctor>();
-        //    }
-        //    if (failed_login_doctor[0].Blocked == false)
-        //    {
-
-        //        DoctorViewModel pat = new DoctorViewModel();
-        //        pat.doctors = obj;
-        //        pat.doctor = new Doctor();
-        //        pat.doctor.Id = search_Id;
-
-        //        if (pat.doctors.Count() == 0)
-        //        {
-        //            failed_login_doctor[0].LoginAttemptDoctors = failed_login_doctor[0].LoginAttemptDoctors + 1;
-        //            dal.SaveChanges();
-
-        //            if (failed_login_doctor[0].LoginAttemptDoctors > 1)
-        //            {
-        //                TempData["UserCode_error"] = "UserCode";
-        //            }
-
-        //            else if (failed_login_doctor[0].LoginAttemptDoctors == 5)
-        //            {
-        //                TempData["User_lock"] = "Sorry, You are locked from the system";
-        //                failed_login_doctor[0].Blocked = true;
-        //                dal.SaveChanges();
-        //            }
-        //            TempData["failed"] = "Doctor Login failed. one of the details supplied is wrong.";
-        //            TempData["attempts"] = "you left " + (5 - (failed_login_doctor[0].LoginAttemptDoctors)).ToString() + " chances";
-        //            ViewBag.UserNow = pat.doctor.UserName;
-        //            return View("DoctorLogin", pat.doctor);
-        //        }
-        //        else
-        //        {
-        //            failed_login_doctor[0].LoginAttemptDoctors = 0;
-        //            dal.SaveChanges();
-        //            Doctor new_pat = new Doctor();
-        //            new_pat = pat.doctors[0];
-        //            Session["UserName"] = new_pat.UserName;
-        //            Session["DoctorId"] = new_pat.Id;
-        //            Session["PatientLoggedIn"] = new_pat.UserName;
-        //            return View("DoctorWindow", new_pat);
-        //        }
-        //    }
-        //    else
-        //    {
-        //        TempData["User_lock"] = "Sorry, You are locked from the system";
-        //        return View("DoctorLogin", failed_login_doctor[0]);
-        //    }
-        //}
-
-
-        //[HttpPost]
-        //public ActionResult CheckDoctor()
-        //{
-        //    DoctorDal dal = new DoctorDal();
-        //    string search_UserName = Request.Form["UserName"].ToString();
-        //    string search_Password = Request.Form["Password"].ToString();
-
-        //    List<Doctor> obj =
-        //        (from x in dal.Doctor
-        //         where x.UserName == search_UserName && x.Password == search_Password
-        //         select x).ToList<Doctor>();
-        //    DoctorViewModel doc = new DoctorViewModel();
-        //    doc.doctors = obj;
-        //    doc.doctor = new Doctor();
-        //    doc.doctor.UserName = search_UserName;
-
-        //    if (doc.doctors.Count() == 0)
-        //    {
-        //        TempData["failed"] = "ManagerLogin failed . User name or password supplied doesn't exist.";
-        //        return View("ManagerLogin", doc.doctor);
-        //    }
-        //    else
-        //    {
-        //        HttpCookie cookie = new HttpCookie("search");
-        //        //System.Web.Security.FormsAuthentication.SetAuthCookie(mng.managers[0].UserName, true);
-        //        Doctor new_doc = new Doctor();
-        //        Response.Cookies["UserName"].Value = new_doc.UserName;
-        //        new_doc = doc.doctors[0];
-        //        Session["DoctorLoggedIn"] = new_doc.UserName;
-        //        Session["UserName"] = new_doc.UserName;
-        //        //return View("ManagerWindow", new_mng);
-        //        return View("../Home/Index", new_doc);
-
-        //    }
-        //}
-
         public ActionResult DoctorLogin()
          {
             ViewBag.Message = "DoctorLogin";
@@ -347,12 +228,12 @@ namespace MedicalStore.Controllers
                 return View(doc.doctor);
             }
         }
+
         public ActionResult ShowPatients()
         {
-
-            return View();
-
+           return View();
         }
+
         public ActionResult ShowDoctors()
         {
             DoctorDal dal = new DoctorDal();
