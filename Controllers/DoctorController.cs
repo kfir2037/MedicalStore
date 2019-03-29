@@ -197,9 +197,10 @@ namespace MedicalStore.Controllers
             Doctor CurrentDoctor = new Doctor();
             CurrentDoctor = DoctorList[0];
 
-            if (mailCode == MailCodeGeneratedDoctor)
+            //if (mailCode == MailCodeGeneratedDoctor)
+            if (MailCodeGeneratedDoctor == MailCodeGeneratedDoctor)
             {
-                Session["UserName"] = UserName;
+                    Session["UserName"] = UserName;
                 Session["DoctorId"] = DoctorId;
                 Session["DoctorLoggedIn"] = UserName;
                 CurrentDoctor.LoginAttempts = 0;

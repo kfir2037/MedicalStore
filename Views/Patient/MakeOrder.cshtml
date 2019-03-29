@@ -62,15 +62,22 @@
 
     <form method="post" action="../Request/MakeOrder">
 
+@*<script>
 
-        @*new SelectList(Enum.GetValues(ProductName)),
-        "Select Gender")*@
+    var i;
+    var list = [];
+    for (i = 0; i <@Model.products.Count(); i++) {
+        list.push(@Model.products[i].MedId+","+ @Model.products[i].MedName)  
+    }
 
-        @Html.DropDownListFor(m => m.product.MedName, new SelectList(Model.products, "MedName", "MedName"), "Please choose your medicine", new { name = "Name", id = "MedId" })
+</script>*@
+            
+        @Html.DropDownListFor(m => m.product.MedId, new SelectList(Model.products, "MedId", "MedName"), "Please choose your medicine", new { name = "Name", id = "MedId"})
+
         <br />
         <br />
 
-        @Html.DropDownListFor(m => m.doctors, new SelectList(Model.doctors, "FirstName", "FirstName"), "Please choose your doctor", new { name = "Name" })
+        @Html.DropDownListFor(m => m.doctor.Id , new SelectList(Model.doctors, "Id", "FirstName"), "Please choose your doctor", new { name = "Name" })
 
         @*<div>
             <label class="loginFormElement">User Name:</label>

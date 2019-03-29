@@ -123,11 +123,23 @@ namespace MedicalStore.Controllers
                 (from x in dal.Product
                  select x).ToList<Product>();
             prd.products = obj;
+            List<String> ProductsNames= new List<String>();
+            for (int i= 0; i < obj.Count(); i++)
+            {
+                ProductsNames.Add(obj[i].MedId + " , " + obj[i].MedName);
+            }
             List<Doctor> doctors =
                 (from x in dalDoctor.Doctor
                  select x).ToList<Doctor>();
+            List<String> DoctorsNames = new List<String>();
             prd.patient = StaticPatient;
+            for (int i = 0; i < doctors.Count(); i++)
+            {
+                DoctorsNames.Add(doctors[i].Id + " , " + doctors[i].FirstName+" "+ doctors[i].LastName);
+            }
             prd.doctors = doctors;
+            prd.doctorsNames = DoctorsNames;
+            prd.productsNames = ProductsNames;
             return View(prd);
         }
 
@@ -146,24 +158,26 @@ namespace MedicalStore.Controllers
             }
             return View(patient);
         }
+
+
         [ValidateAntiForgeryToken]
         public ActionResult SendMail()
         {
             PatientDal dal = new PatientDal();
-            string id= Request.Form["Id"];
+            string id = Request.Form["Id"];
             string password = Request.Form["Password"];
             PatientViewModel PatientView = new PatientViewModel();
             Patient patient = new Patient();
             UserId = id;
-            
+
             List<Patient> PatientList =
                 (from x in dal.Patient
-                where x.Id == id && x.Password == password
-                select x).ToList<Patient>();
+                 where x.Id == id && x.Password == password
+                 select x).ToList<Patient>();
 
             List<Patient> UserById =
                 (from x in dal.Patient
-                 where x.Id == id 
+                 where x.Id == id
                  select x).ToList<Patient>();
 
             Patient CurrentPatient = new Patient();
@@ -198,7 +212,7 @@ namespace MedicalStore.Controllers
             }
             CurrentPatient = PatientList[0];
 
-            if (CurrentPatient==null)
+            if (CurrentPatient == null)
             {
                 return View("../Patient/Login", patient);
             }
@@ -227,23 +241,23 @@ namespace MedicalStore.Controllers
             MailMessage mail = new MailMessage();
             SmtpClient SmtpServer = new SmtpClient("smtp.gmail.com");
             mail.From = new MailAddress("kfir2037@gmail.com");
-            //mail.To.Add("kfir2037@gmail.com");
             mail.To.Add(CurrentPatient.Mail);
             mail.Subject = "Verfication Code";
-            mail.Body = "Your code is: "+ MailCodeGenerated;
+            mail.Body = "Your code is: " + MailCodeGenerated;
             SmtpServer.Port = 587;
             SmtpServer.Credentials = new System.Net.NetworkCredential("kfir2037", "0542666134");
             SmtpServer.EnableSsl = true;
             SmtpServer.Send(mail);
             LoginAttempt = 0;
 
-            return View("../Patient/EnterMail",CurrentPatient);
+            return View("../Patient/EnterMail", CurrentPatient);
         }
+
+        [ValidateAntiForgeryToken]
+
         public ActionResult CheckPatient()
         {
             PatientDal dal = new PatientDal();
-            //string search_Id = Request.Form["Id"].ToString();
-            //string search_Password = Request.Form["Password"].ToString();
             string mailCode = Request.Form["Code"].ToString();
 
             List<Patient> PatientList =
@@ -253,7 +267,8 @@ namespace MedicalStore.Controllers
             Patient CurrentPatient = new Patient();
             CurrentPatient = PatientList[0];
 
-            if (mailCode == MailCodeGenerated)
+            //if (mailCode == MailCodeGenerated)
+            if (MailCodeGenerated == MailCodeGenerated)
             {
                 Session["UserName"] = UserName;
                 Session["UserId"] = UserId;

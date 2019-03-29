@@ -65,7 +65,7 @@ namespace MedicalStore.Controllers
         }
         public ActionResult WatchRequests()
         {
-            var id = @Session["UserId"];
+            var id = @Session["DoctorId"];
             RequestDal dal = new RequestDal();
             List<Request> requests =
                 (from x in dal.Requests
@@ -116,40 +116,43 @@ namespace MedicalStore.Controllers
             }
             base.Dispose(disposing);
         }
-        public ActionResult MakeOrder()
+        public ActionResult MakeOrder(ProductViewModel check)
         {
             Request req = new Request();
-            string UserName =Request.Form["UserName"];
-            string MedicineId = Request.Form["MedId"];
-            string ID = Request.Form["ID"];
-            string DocId = Request.Form["DocId"];
-
-            req.MedId = MedicineId.ToString();
-            req.PatientId = ID.ToString();
-            req.DocId = DocId.ToString();
+            string PatientID = Request.Form["ID"];
+            req.MedId = check.product.MedId.ToString();
+            req.PatientId = PatientID.ToString();
+            req.DocId = check.doctor.Id;
             RequestViewModel cvm = new RequestViewModel();
             //Manager obj = new Manager();
             RequestDal dal = new RequestDal();
 
-            if (ModelState.IsValid)
-            {
-                dal.Requests.Add(req);
-                dal.SaveChanges();
-                TempData["Order"] = "Your Request sent to the doctor!";
-                cvm.requests = dal.Requests.ToList<Request>();
-                //return View("../User/MakeOrder");
-                return RedirectToAction("MakeOrder", "Patient");
-            }
-            else
-            {
-                cvm.request = req;
-            }
-
+            dal.Requests.Add(req);
+            dal.SaveChanges();
+            TempData["Order"] = "Your Request sent to the doctor!";
             cvm.requests = dal.Requests.ToList<Request>();
-            TempData["Order"] = "Something went wrong with your Order!";
-
+            //return View("../User/MakeOrder");
             return RedirectToAction("MakeOrder", "Patient");
 
+            //    if (ModelState.IsValid)
+            //    {
+            //        dal.Requests.Add(req);
+            //        dal.SaveChanges();
+            //        TempData["Order"] = "Your Request sent to the doctor!";
+            //        cvm.requests = dal.Requests.ToList<Request>();
+            //        //return View("../User/MakeOrder");
+            //        return RedirectToAction("MakeOrder", "Patient");
+            //    }
+            //    else
+            //    {
+            //        cvm.request = req;
+            //    }
+
+            //    cvm.requests = dal.Requests.ToList<Request>();
+            //    TempData["Order"] = "Something went wrong with your Order!";
+
+            //    return RedirectToAction("MakeOrder", "Patient");
+
+        }
         }
     }
-}
